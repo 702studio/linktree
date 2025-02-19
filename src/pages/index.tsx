@@ -311,7 +311,7 @@ export default function Home() {
       <footer className="mt-20 fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm">
         <div className="max-w-2xl mx-auto px-6 py-4">
           <p className="text-[11px] font-light tracking-wide opacity-30 select-none">
-            © 2025 Tolga Özışık. All content, designs and intellectual property on this site are protected under international copyright law. Any unauthorized use or reproduction is strictly prohibited.
+            © 2024 Tolga Özışık. All content, designs and intellectual property on this site are protected under international copyright law. Any unauthorized use or reproduction is strictly prohibited.
           </p>
         </div>
       </footer>
