@@ -29,38 +29,68 @@ export default function Home() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    // EmailJS'i başlat
-    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '');
+    const initEmailJS = async () => {
+      try {
+        const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+        if (!publicKey) {
+          console.error('EmailJS public key bulunamadı');
+          return;
+        }
+        await emailjs.init(publicKey);
+        console.log('EmailJS başarıyla başlatıldı');
+      } catch (error) {
+        console.error('EmailJS başlatma hatası:', error);
+      }
+    };
+
+    initEmailJS();
   }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!message.trim() || !name.trim()) return;
+    if (!message.trim() || !name.trim()) {
+      setStatusMessage('Lütfen isim ve mesaj alanlarını doldurun.');
+      return;
+    }
     
+    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
+        !process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID) {
+      setStatusMessage('E-posta servisi yapılandırması eksik.');
+      return;
+    }
+
     setIsLoading(true);
     setStatusMessage('');
     setShowSuccess(false);
 
     try {
       const templateParams = {
-        message: message,
-        from_name: name,
+        message: message.trim(),
+        from_name: name.trim(),
+        to_name: 'Tolga Özışık',
         to_email: 'tolgaozisik@gmail.com',
+        reply_to: 'tolgaozisik@gmail.com'
       };
 
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+      const response = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
         templateParams
       );
 
-      setMessage('');
-      setName('');
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 3000);
-    } catch (error) {
-      console.error('Email gönderme hatası:', error);
-      setStatusMessage('Bir hata oluştu. Lütfen tekrar deneyin.');
+      if (response.status === 200) {
+        setMessage('');
+        setName('');
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
+      } else {
+        throw new Error('E-posta gönderilemedi: ' + response.text);
+      }
+    } catch (error: any) {
+      console.error('E-posta gönderme hatası:', error);
+      setStatusMessage(
+        error.message || 'Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
+      );
     } finally {
       setIsLoading(false);
     }
