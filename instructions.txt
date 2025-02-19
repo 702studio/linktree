@@ -1,0 +1,57 @@
+# LinkTree Projesi Kurulum Talimatları
+
+## Gereksinimler
+- Node.js (v14 veya üzeri)
+- npm (Node Package Manager)
+- Git
+
+## Kurulum Adımları
+
+1. Projeyi klonlayın:
+```bash
+git clone [proje-url]
+cd linktree-cursor
+```
+
+2. Bağımlılıkları yükleyin:
+```bash
+npm install
+```
+
+3. Geliştirme sunucusunu başlatın:
+```bash
+npm run dev
+```
+
+4. Tarayıcınızda aşağıdaki adresi açın:
+```
+http://localhost:3000
+```
+
+## Proje Yapısı
+- `/src`: Kaynak kodları
+- `/public`: Statik dosyalar
+- `/components`: React bileşenleri
+- `/styles`: CSS dosyaları
+
+## Önemli Komutlar
+- `npm run dev`: Geliştirme sunucusunu başlatır
+- `npm run build`: Projeyi derler
+- `npm run start`: Derlenmiş projeyi başlatır
+- `npm run test`: Testleri çalıştırır
+
+## Katkıda Bulunma
+1. Yeni bir branch oluşturun
+2. Değişikliklerinizi commit edin
+3. Pull request açın
+
+## İletişim
+Sorularınız için: [iletişim-bilgisi] 
+
+Node.js kurulumunu tamamladığınızda lütfen bana haber verin, size yardımcı olmaya devam edeceğim.
+
+Node.js'in doğru şekilde yüklendiğini kontrol etmek için:
+```bash
+node --version
+npm --version
+``` 

@@ -1,0 +1,35 @@
+Proje Tanımı
+Amaç: Siyah zemin üzerinde minimal ve “Putal” benzeri prestijli bir tasarıma sahip, kişisel link sayfası oluşturmak.
+Dil: Arayüz İngilizce olacak.
+Tasarım Kimliği:
+En üstte ince bir “rainbow gradient” bar (sol–sağ renk geçişli).
+Ana başlık: “TOLGA ÖZIŞIK” (büyük harf, hafif letter-spacing), alt başlık: “Founder & Creative Director at @702.studio”.
+Renk paleti siyah zemin + hover/etkileşimlerde #ffd600 veya benzeri parlak bir renk.
+Tipografi: SuisseInt font ailesi (OTF formatında, fonts/ klasöründe yer alacak).
+Responsive (mobil/masaüstü) uyumlu tasarım.
+Sayfa İçeriği
+Header
+
+Üstte ince “rainbow gradient” şerit.
+Orta kısımda isim ve unvan bilgisi.
+Essential Links
+
+Alt alta listelenen linkler (Official Website, Behance, LinkedIn, YouTube, Instagram, Dribbble).
+Her link satırlarla (border-bottom) ayrılacak, hover durumunda renk değişimi.
+Digital Art (Akordeon)
+
+“Digital Art” başlığı altında iki açılır içerik: “Crypto.com - Created” ve “MakersPlace”.
+Açıldığında kısa bir metin veya link gösterilecek (ör. “Visit Crypto.com”).
+Açılır/kapanır yapıyı details/summary veya basit JS ile oluşturun; tasarımla bütünleşik olsun.
+Footer
+
+“© 2025 Tolga Ozisik – All rights reserved” şeklinde basit bir alt bilgi.
+Teknik Gereksinimler
+HTML + CSS (tercihen ayrı dosyalar: index.html ve style.css).
+SuisseInt OTF Fontları: fonts/ klasöründe saklanacak, @font-face ile yüklenecek.
+Responsive Tasarım: Maksimum genişlik ~640px olacak şekilde merkezde bir container.
+Tipografik Ayrıntılar: Başlıkta hafif letter-spacing, alt başlıkta normal aralık, hover renkleri tutarlı (#ffd600 vb.).
+Cross-Browser Uyumluluk: Fontların sorunsuz yüklenmesi ve akordeonun tüm modern tarayıcılarda çalışması.
+Beklenen Çıktı
+Tarayıcıda açıldığında siyah zemin, üstte ince gradient bar, ortada büyük harfli “TOLGA ÖZIŞIK” ve unvan, altında satırlarla ayrılmış linkler, “Digital Art” bölümünde akordeon, en altta basit bir footer gözükecek.
+Tüm metinler İngilizce, fontlar doğru şekilde yüklenecek, responsive tasarım mobilde de düzgün görünecek.

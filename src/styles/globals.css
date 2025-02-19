@@ -1,0 +1,988 @@
+/* Font tanımlamaları */
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('/fonts/SuisseIntl-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('/fonts/SuisseIntl-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('/fonts/SuisseIntl-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('/fonts/SuisseIntl-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('/fonts/SuisseIntl-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base stiller */
+@layer base {
+  html {
+    font-family: 'SuisseIntl', sans-serif;
+  }
+  
+  body {
+    @apply bg-black text-white/80;
+    letter-spacing: 0.01em;
+  }
+
+  /* Link reset */
+  a {
+    @apply text-white/80;
+    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  a:visited {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  /* Instagram link override */
+  a[href*="instagram.com"] {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  a[href*="instagram.com"]:visited {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* Scrollbar özelleştirmesi */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 hover:bg-white/20;
+    border-radius: 4px;
+  }
+}
+
+/* Özel komponentler */
+@layer components {
+  .link-item {
+    @apply block py-3 text-base font-light hover:text-accent transition-colors duration-200;
+  }
+  
+  .section-title {
+    @apply text-lg font-medium mb-4 tracking-wide;
+  }
+  
+  .accordion-item {
+    @apply border-t border-white/10;
+  }
+  
+  .accordion-trigger {
+    @apply w-full py-3 flex items-center justify-between text-base font-light hover:text-accent transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .social-link {
+    @apply block w-full p-4 text-center bg-white bg-opacity-10 hover:bg-opacity-20 
+           rounded-lg transition-all duration-200 text-white;
+  }
+}
+
+/* Özel animasyonlar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Akordeon Animasyonları */
+.accordion-content {
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 0;
+  opacity: 0;
+}
+
+.accordion-content.open {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.accordion-link {
+  transform: translateX(-16px);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-left: 32px;
+  will-change: transform, opacity;
+}
+
+.accordion-content.open .accordion-link {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.accordion-content.open a.accordion-link:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.accordion-content.open a.accordion-link:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+.accordion-content.open form > div:first-child {
+  transition-delay: 0s;
+}
+
+.accordion-content.open form > input {
+  transition-delay: 0.15s;
+}
+
+/* Kapanma animasyonu */
+.accordion-content:not(.open) .accordion-link {
+  transform: translateX(-32px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Digital Art kapanma sırası */
+.accordion-content:not(.open) a.accordion-link:nth-child(1) {
+  transition-delay: 0.15s;
+}
+
+.accordion-content:not(.open) a.accordion-link:nth-child(2) {
+  transition-delay: 0s;
+}
+
+/* Quick Mail kapanma sırası ve animasyonu */
+.accordion-content:not(.open) form > input {
+  transform: translateX(-32px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0s;
+  padding-left: 0;
+}
+
+.accordion-content:not(.open) form > div:first-child {
+  transform: translateX(-32px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.15s;
+  padding-left: 0;
+}
+
+/* Akordeon ikon stilleri */
+.accordion-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  line-height: 20px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+  opacity: 0.6;
+  margin-left: 4px;
+}
+
+button[class*="w-full py-4 border-b"]:hover .accordion-icon {
+  opacity: 1;
+}
+
+.accordion-icon.rotate-45 {
+  transform: rotate(45deg);
+}
+
+/* Success Icon Animation */
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Form Input ve Textarea Stilleri */
+input, textarea {
+  position: relative;
+  background: transparent;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.accordion-content input,
+.accordion-content textarea {
+  position: relative;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+/* Input ve textarea için hover/focus efektleri */
+.accordion-content input:hover,
+.accordion-content input:focus,
+.accordion-content textarea:hover,
+.accordion-content textarea:focus {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+  position: relative;
+  z-index: 2;
+}
+
+/* Input container stilleri */
+.accordion-content .input-container {
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  --hover-color: rgba(255, 255, 255, 1);
+  transition: all 0.3s ease;
+}
+
+/* Alt çizgi efekti */
+.accordion-content .input-container::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--hover-color) 20%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.accordion-content .input-container:hover::after,
+.accordion-content .input-container:focus-within::after {
+  opacity: 1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  background: transparent;
+}
+
+.accordion-link input:focus, .accordion-link textarea:focus {
+  outline: none;
+  background: transparent;
+}
+
+/* Animasyonlar */
+@keyframes slideUp {
+  from {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.send-button {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Sosyal Medya Link Hover Efektleri */
+@keyframes glowPulse {
+  0% {
+    opacity: 0.4;
+    box-shadow: 0 0 15px var(--hover-color);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px var(--hover-color);
+  }
+  100% {
+    opacity: 0.4;
+    box-shadow: 0 0 15px var(--hover-color);
+  }
+}
+
+/* Ortak hover ve alt çizgi efektleri */
+.social-link-hover-effect,
+.accordion-content input,
+.accordion-content textarea,
+button.w-full.py-4.border-b.border-white\/10.flex.items-center.justify-between {
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.social-link-hover-effect::after,
+.accordion-content input::after,
+.accordion-content textarea::after,
+button.w-full.py-4.border-b.border-white\/10.flex.items-center.justify-between::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--hover-color) 20%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-link-hover-effect:hover::after,
+.accordion-content input:hover::after,
+.accordion-content input:focus::after,
+.accordion-content textarea:hover::after,
+.accordion-content textarea:focus::after,
+button.w-full.py-4.border-b.border-white\/10.flex.items-center.justify-between:hover::after {
+  opacity: 1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Platform-specific colors */
+.website-link:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.behance-link:hover {
+  --hover-color: rgba(0, 87, 255, 1);
+  color: rgb(0, 87, 255);
+  text-shadow: 
+    0 0 10px rgba(0, 87, 255, 0.5),
+    0 0 20px rgba(0, 87, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(0, 87, 255, 0.3));
+}
+
+.linkedin-link:hover {
+  --hover-color: rgba(0, 119, 181, 1);
+  color: rgb(0, 119, 181);
+  text-shadow: 
+    0 0 10px rgba(0, 119, 181, 0.5),
+    0 0 20px rgba(0, 119, 181, 0.3);
+  filter: drop-shadow(0 0 2px rgba(0, 119, 181, 0.3));
+}
+
+.youtube-link:hover {
+  --hover-color: rgba(255, 0, 0, 1);
+  color: rgb(255, 0, 0);
+  text-shadow: 
+    0 0 10px rgba(255, 0, 0, 0.5),
+    0 0 20px rgba(255, 0, 0, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3));
+}
+
+.dribbble-link:hover {
+  --hover-color: rgba(234, 76, 137, 1);
+  color: rgb(234, 76, 137);
+  text-shadow: 
+    0 0 10px rgba(234, 76, 137, 0.5),
+    0 0 20px rgba(234, 76, 137, 0.3);
+  filter: drop-shadow(0 0 2px rgba(234, 76, 137, 0.3));
+}
+
+.crypto-link:hover {
+  --hover-color: rgba(0, 45, 116, 1);
+  color: rgb(0, 45, 116);
+  text-shadow: 
+    0 0 15px rgba(0, 45, 116, 0.7),
+    0 0 25px rgba(0, 45, 116, 0.5),
+    0 0 35px rgba(0, 45, 116, 0.3);
+  filter: drop-shadow(0 0 4px rgba(0, 45, 116, 0.5));
+}
+
+.crypto-link:hover::after {
+  opacity: 1;
+  background: linear-gradient(90deg, rgb(0, 45, 116) 30%, transparent);
+  box-shadow: 
+    0 0 15px rgba(0, 45, 116, 0.7),
+    0 0 25px rgba(0, 45, 116, 0.5);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.makers-link:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+/* Instagram Renk Animasyonu */
+@keyframes instagramGradient {
+  0% {
+    background-position: 0% 50%;
+    text-shadow: 
+      0 0 10px rgba(138, 58, 185, 0.5),
+      0 0 20px rgba(188, 42, 141, 0.3);
+  }
+  25% {
+    text-shadow: 
+      0 0 10px rgba(233, 89, 80, 0.5),
+      0 0 20px rgba(205, 72, 107, 0.3);
+  }
+  50% {
+    background-position: 100% 50%;
+    text-shadow: 
+      0 0 10px rgba(244, 111, 48, 0.5),
+      0 0 20px rgba(251, 173, 80, 0.3);
+  }
+  75% {
+    text-shadow: 
+      0 0 10px rgba(252, 204, 99, 0.5),
+      0 0 20px rgba(138, 58, 185, 0.3);
+  }
+  100% {
+    background-position: 0% 50%;
+    text-shadow: 
+      0 0 10px rgba(138, 58, 185, 0.5),
+      0 0 20px rgba(188, 42, 141, 0.3);
+  }
+}
+
+.instagram-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.instagram-link:hover {
+  --hover-color: rgba(138, 58, 185, 1);
+  background: linear-gradient(
+    45deg,
+    #8a3ab9 0%,    /* Purple Violet */
+    #bc2a8d 15%,   /* Red Violet */
+    #e95950 30%,   /* Kırmızı */
+    #cd486b 45%,   /* Maroon */
+    #f46f30 60%,   /* Turuncu */
+    #fbad50 75%,   /* Açık Turuncu */
+    #fccc63 90%,   /* Sarı */
+    #8a3ab9 100%   /* Purple Violet tekrar */
+  );
+  background-size: 300% 100%;
+  animation: instagramGradient 6s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 2px rgba(138, 58, 185, 0.3));
+}
+
+.instagram-link:hover::after {
+  background: linear-gradient(
+    90deg,
+    #8a3ab9 0%,    /* Purple Violet */
+    #bc2a8d 15%,   /* Red Violet */
+    #e95950 30%,   /* Kırmızı */
+    #cd486b 45%,   /* Maroon */
+    #f46f30 60%,   /* Turuncu */
+    #fbad50 75%,   /* Açık Turuncu */
+    #fccc63 90%,   /* Sarı */
+    #8a3ab9 100%   /* Purple Violet tekrar */
+  );
+  background-size: 300% 100%;
+  animation: instagramGradient 6s ease-in-out infinite;
+  opacity: 1;
+  filter: blur(1px);
+}
+
+.dribbble-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+.dribbble-link:hover {
+  --hover-color: rgba(234, 76, 137, 1);
+  color: rgb(234, 76, 137);
+}
+
+/* Digital Art Platform Colors */
+.crypto-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+.crypto-link:hover {
+  --hover-color: rgba(0, 45, 116, 1);
+  color: rgb(0, 45, 116);
+}
+
+.makers-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+.makers-link:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+}
+
+/* Akordeon başlık hover efekti */
+.accordion-content + button,
+button[class*="w-full py-4 border-b"] {
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.accordion-content + button:hover,
+button[class*="w-full py-4 border-b"]:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.accordion-content + button::after,
+button[class*="w-full py-4 border-b"]::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--hover-color) 20%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.accordion-content + button:hover::after,
+button[class*="w-full py-4 border-b"]:hover::after {
+  opacity: 1;
+}
+
+/* Gradient fade container - tamamen yeniden yazıldı */
+.gradient-fade-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gradient-fade-container > div {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(0, 0, 0));
+}
+
+/* Glow efekti */
+.accordion-content input:hover,
+.accordion-content input:focus,
+.accordion-content textarea:hover,
+.accordion-content textarea:focus {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+  position: relative;
+  z-index: 2;
+}
+
+/* Input container */
+.accordion-content .input-container {
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  --hover-color: rgba(255, 255, 255, 1);
+  transition: all 0.3s ease;
+}
+
+/* Platform-specific colors */
+.website-link:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.behance-link:hover {
+  --hover-color: rgba(0, 87, 255, 1);
+  color: rgb(0, 87, 255);
+  text-shadow: 
+    0 0 10px rgba(0, 87, 255, 0.5),
+    0 0 20px rgba(0, 87, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(0, 87, 255, 0.3));
+}
+
+.linkedin-link:hover {
+  --hover-color: rgba(0, 119, 181, 1);
+  color: rgb(0, 119, 181);
+  text-shadow: 
+    0 0 10px rgba(0, 119, 181, 0.5),
+    0 0 20px rgba(0, 119, 181, 0.3);
+  filter: drop-shadow(0 0 2px rgba(0, 119, 181, 0.3));
+}
+
+.youtube-link:hover {
+  --hover-color: rgba(255, 0, 0, 1);
+  color: rgb(255, 0, 0);
+  text-shadow: 
+    0 0 10px rgba(255, 0, 0, 0.5),
+    0 0 20px rgba(255, 0, 0, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3));
+}
+
+.dribbble-link:hover {
+  --hover-color: rgba(234, 76, 137, 1);
+  color: rgb(234, 76, 137);
+  text-shadow: 
+    0 0 10px rgba(234, 76, 137, 0.5),
+    0 0 20px rgba(234, 76, 137, 0.3);
+  filter: drop-shadow(0 0 2px rgba(234, 76, 137, 0.3));
+}
+
+.crypto-link:hover {
+  --hover-color: rgba(0, 45, 116, 1);
+  color: rgb(0, 45, 116);
+  text-shadow: 
+    0 0 15px rgba(0, 45, 116, 0.7),
+    0 0 25px rgba(0, 45, 116, 0.5),
+    0 0 35px rgba(0, 45, 116, 0.3);
+  filter: drop-shadow(0 0 4px rgba(0, 45, 116, 0.5));
+}
+
+.crypto-link:hover::after {
+  opacity: 1;
+  background: linear-gradient(90deg, rgb(0, 45, 116) 30%, transparent);
+  box-shadow: 
+    0 0 15px rgba(0, 45, 116, 0.7),
+    0 0 25px rgba(0, 45, 116, 0.5);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.makers-link:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+/* Instagram Renk Animasyonu */
+@keyframes instagramGradient {
+  0% {
+    background-position: 0% 50%;
+    text-shadow: 
+      0 0 10px rgba(138, 58, 185, 0.5),
+      0 0 20px rgba(188, 42, 141, 0.3);
+  }
+  25% {
+    text-shadow: 
+      0 0 10px rgba(233, 89, 80, 0.5),
+      0 0 20px rgba(205, 72, 107, 0.3);
+  }
+  50% {
+    background-position: 100% 50%;
+    text-shadow: 
+      0 0 10px rgba(244, 111, 48, 0.5),
+      0 0 20px rgba(251, 173, 80, 0.3);
+  }
+  75% {
+    text-shadow: 
+      0 0 10px rgba(252, 204, 99, 0.5),
+      0 0 20px rgba(138, 58, 185, 0.3);
+  }
+  100% {
+    background-position: 0% 50%;
+    text-shadow: 
+      0 0 10px rgba(138, 58, 185, 0.5),
+      0 0 20px rgba(188, 42, 141, 0.3);
+  }
+}
+
+.instagram-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.instagram-link:hover {
+  --hover-color: rgba(138, 58, 185, 1);
+  background: linear-gradient(
+    45deg,
+    #8a3ab9 0%,    /* Purple Violet */
+    #bc2a8d 15%,   /* Red Violet */
+    #e95950 30%,   /* Kırmızı */
+    #cd486b 45%,   /* Maroon */
+    #f46f30 60%,   /* Turuncu */
+    #fbad50 75%,   /* Açık Turuncu */
+    #fccc63 90%,   /* Sarı */
+    #8a3ab9 100%   /* Purple Violet tekrar */
+  );
+  background-size: 300% 100%;
+  animation: instagramGradient 6s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 2px rgba(138, 58, 185, 0.3));
+}
+
+.instagram-link:hover::after {
+  background: linear-gradient(
+    90deg,
+    #8a3ab9 0%,    /* Purple Violet */
+    #bc2a8d 15%,   /* Red Violet */
+    #e95950 30%,   /* Kırmızı */
+    #cd486b 45%,   /* Maroon */
+    #f46f30 60%,   /* Turuncu */
+    #fbad50 75%,   /* Açık Turuncu */
+    #fccc63 90%,   /* Sarı */
+    #8a3ab9 100%   /* Purple Violet tekrar */
+  );
+  background-size: 300% 100%;
+  animation: instagramGradient 6s ease-in-out infinite;
+  opacity: 1;
+  filter: blur(1px);
+}
+
+.dribbble-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+.dribbble-link:hover {
+  --hover-color: rgba(234, 76, 137, 1);
+  color: rgb(234, 76, 137);
+}
+
+/* Digital Art Platform Colors */
+.crypto-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+.crypto-link:hover {
+  --hover-color: rgba(0, 45, 116, 1);
+  color: rgb(0, 45, 116);
+}
+
+.makers-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+.makers-link:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+}
+
+/* Akordeon başlık hover efekti */
+.accordion-content + button,
+button[class*="w-full py-4 border-b"] {
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.accordion-content + button:hover,
+button[class*="w-full py-4 border-b"]:hover {
+  --hover-color: rgba(255, 255, 255, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.accordion-content + button::after,
+button[class*="w-full py-4 border-b"]::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--hover-color) 20%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.accordion-content + button:hover::after,
+button[class*="w-full py-4 border-b"]:hover::after {
+  opacity: 1;
+}
+
+/* Bilgi ikonu stilleri */
+.info-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  position: relative;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+}
+
+.info-icon::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' shape-rendering='geometricPrecision'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='white' stroke-width='1.5'/%3E%3Cpath d='M12 7.5a.75.75 0 100-1.5.75.75 0 000 1.5zM12 17v-7' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.info-button:hover .info-icon::before {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+/* Modal stilleri */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: rgb(0, 45, 116);
+  background: linear-gradient(135deg, 
+    rgba(0, 45, 116, 0.95) 0%,
+    rgba(0, 65, 166, 0.95) 100%
+  );
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 
+    0 0 30px rgba(0, 45, 116, 0.3),
+    0 0 15px rgba(255, 255, 255, 0.1);
+  animation: slideUp 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+} 
